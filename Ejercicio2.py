@@ -1,23 +1,27 @@
-f = open('Input1.txt', 'r')
-line = 0
+g = 1
+p = 1
+s = 0
+k = 0
 positions = []
 scores = []
-fileContent = f.read().split("\n")
-while (fileContent[line] != '0 0'):
-    prix = int(fileContent[line][0])
-    players = int(fileContent[line][2])
-    while(prix != 0):
-        line += 1
-        positions.append(fileContent[line])
-        prix -= 1
-    line += 1
-    numSystem = int(fileContent[line])
-    while (numSystem != 0):
-        line += 1
-        scores.append(fileContent[line])
-        numSystem -= 1
-    line += 1
-    print(f'Prix {prix} -- {players}')
-    print(f'Positions {positions}')
-    print(f'Scores {scores}')
-    print('-----------------------')
+while(g != 0 and p != 0):
+    g, p = map(int, input().split())
+    if ((g > 0 and g <= 100) and (p > 0 and p <= 100)):
+        aux = 0
+        while (aux < g):
+            inputPositions = input()
+            positions.append(inputPositions.split(" "))
+            aux += 1
+        k = int(input())
+        aux = 0
+        while (aux < k):
+            inputScores = input().split(" ")
+            # define winner
+            lastFinishing = int(inputScores[0]) + 1
+            historicPositions = [0] * p
+            for x in range(g):
+                for y in range(1, lastFinishing):
+                    idx = positions[x].index(str(y))
+                    historicPositions[idx] += int(inputScores[y])
+            print(historicPositions)
+            aux += 1
